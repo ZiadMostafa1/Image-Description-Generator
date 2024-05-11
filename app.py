@@ -3,29 +3,39 @@ from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
+from tensorflow.keras.applications.densenet import DenseNet201
+from tensorflow.keras.models import Model, load_model
+import numpy as np
 import pickle
 
 # Load your trained model and tokenizer
 max_length = 35 # Define your max_length
 
-model = tf.keras.models.load_model('model.h5') 
-    
+caption_model = load_model('model.h5') 
+
 with open('tokenizer.pkl', 'rb') as f:
     tokenizer = pickle.load(f)
 
-# Load features from a pickle file
-with open('features.pkl', 'rb') as file:
-    features = pickle.load(file)
+# Load the DenseNet201 model
+fe = load_model('densenet201_model.h5')
 
 # Define the functions
+def generate_feature(image):
+    img = img_to_array(image)
+    img = img/255.
+    img = np.expand_dims(img,axis=0)
+
+    # Generate the feature
+    feature = fe.predict(img, verbose=0)
+    return feature
+
 def idx_to_word(integer, tokenizer):
     for word, index in tokenizer.word_index.items():
         if index == integer:
             return word
     return None
 
-def predict_caption(model, image, tokenizer, max_length, features):
-    feature = features[image]
+def predict_caption(model, feature, tokenizer, max_length):
     in_text = "startseq"
     for i in range(max_length):
         sequence = tokenizer.texts_to_sequences([in_text])[0]
@@ -58,10 +68,11 @@ if uploaded_file is not None:
 
     # Preprocess the image
     img = load_img(uploaded_file, target_size=(224,224))
-    img = img_to_array(img)
-    img = img/255.
+
+    # Generate feature using your defined function
+    feature = generate_feature(img)
 
     # Predict caption using your defined function
-    predicted_caption = predict_caption(model, img, tokenizer, max_length, features)
+    predicted_caption = predict_caption(caption_model, feature, tokenizer, max_length)
 
     st.success(f"Predicted Caption: {predicted_caption}")
