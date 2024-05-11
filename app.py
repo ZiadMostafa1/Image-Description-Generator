@@ -77,4 +77,9 @@ if uploaded_file is not None:
     # Predict caption using your defined function
     predicted_caption = predict_caption(caption_model, feature, tokenizer, max_length)
 
+    #remove startseq and endseq
+
+    predicted_caption = predicted_caption.split()[1:-1]
+    predicted_caption = ' '.join(predicted_caption)
+
     st.success(f"Predicted Caption: {predicted_caption}")
