@@ -50,7 +50,7 @@ def predict_caption(model, image, tokenizer, max_length, features):
 st.title("Image Captioning App")
 st.write("Upload an image and get a caption!")
 
-uploaded_file = st.file_uploader("Choose an Image", type="jpg")
+uploaded_file = st.file_uploader("Choose an Image", type=["jpg", "png"])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
