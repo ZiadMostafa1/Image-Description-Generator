@@ -11,7 +11,7 @@ import pickle
 # Load your trained model and tokenizer
 max_length = 35 # Define your max_length
 
-caption_model = load_model('caption_model.h5') 
+caption_model = load_model('model.h5') 
 
 with open('tokenizer.pkl', 'rb') as f:
     tokenizer = pickle.load(f)
