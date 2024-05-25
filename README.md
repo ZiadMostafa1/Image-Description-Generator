@@ -1,6 +1,6 @@
-﻿# Image Captioning App
+﻿# Image Captioning Generator
 
-This project is an Image Captioning application that uses a Convolutional Neural Network (CNN) and Long Short-Term Memory (LSTM) model to generate captions for images. The project includes a Jupyter Notebook for training the model and a Streamlit app for generating captions on user-uploaded images.
+This project is an Image Captioning generator that uses a Convolutional Neural Network (CNN) and Long Short-Term Memory (LSTM) model to generate captions for images. The project includes a Jupyter Notebook for training the model and a Streamlit app for generating captions on user-uploaded images.
 
 Try the [Streamlit app!](https://ziadmostafa1-image-description-generator-app-ckk9lv.streamlit.app/)
 
