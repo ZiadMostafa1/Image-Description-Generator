@@ -81,10 +81,12 @@ Here are some sample results from the model:
 
 ### Example 1
 ![Example 1](example1.jpg)
+
 *Predicted Caption*: a dog runs through the grass
 
 ### Example 2
 ![Example 2](example2.jpg)
+
 *Predicted Caption*: two children are sitting on bench
 
 The model's performance can be improved by training on larger datasets and using advanced techniques like attention mechanisms.
